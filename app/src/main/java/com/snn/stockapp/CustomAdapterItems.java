@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder> {
@@ -60,7 +62,7 @@ class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder>
             tv_name.setText(items.get(position).getName());
             tv_location.setText(items.get(position).getLocation());
             tv_piece.setText(context.getString(R.string.piece, String.valueOf(items.get(position).getPiece())));
-            imageView.setImageResource(items.get(position).getImage());
+            Picasso.get().load(items.get(position).getImage()).fit().centerCrop().into(imageView);
         }
     }
 }

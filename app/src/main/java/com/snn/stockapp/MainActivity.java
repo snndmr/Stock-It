@@ -13,9 +13,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Room> getRoomTestData() {
         ArrayList<Room> rooms = new ArrayList<>();
 
-        for (int i = 0; i < 15; i++) {
-            rooms.add(new Room(i % 3 == 0 ? "Bedroom" : "Living Room",
-                    i % 3 == 0 ? R.drawable.room_test_2 : R.drawable.room_test_1));
+        for (int i = 0; i < 50; i++) {
+            rooms.add(new Room(
+                    i % 5 == 0 ? "Bedroom" : i % 4 == 0 ? "Living Room" : i % 3 == 0 ? "Kitchen" : "Garage",
+                    i % 5 == 0 ? R.drawable.room_test_1 : i % 3 == 0 ? R.drawable.room_test_2 : i % 2 == 0 ? R.drawable.room_test_3 : R.drawable.room_test_4));
         }
         return rooms;
     }

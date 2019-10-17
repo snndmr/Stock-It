@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder> {
@@ -43,6 +45,7 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
 
     class Holder extends RecyclerView.ViewHolder {
 
+        private int position;
         private TextView textView;
         private ImageView imageView;
 
@@ -55,15 +58,19 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    context.startActivity(new Intent(context, RoomActivity.class));
+                    Intent intent = new Intent(context, RoomActivity.class);
+                    intent.putExtra("Room", rooms.get(position));
+                    context.startActivity(intent);
                 }
             });
         }
 
         void setData(int position) {
+            this.position = position;
+
             textView.setText(rooms.get(position).getName());
             textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
-            imageView.setImageResource(rooms.get(position).getImage());
+            Picasso.get().load(rooms.get(position).getImage()).fit().centerCrop().into(imageView);
         }
     }
 }

@@ -1,8 +1,9 @@
 package com.snn.stockapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-class Room {
+class Room implements Serializable {
     private int image;
     private String name;
     private ArrayList<Item> items;
