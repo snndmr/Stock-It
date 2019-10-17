@@ -1,6 +1,7 @@
 package com.snn.stockapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ import java.util.ArrayList;
 
 class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
 
+    private Context context;
     private ArrayList<Room> rooms;
     private LayoutInflater layoutInflater;
 
     CustomAdapter(Context context, ArrayList<Room> roomTestData) {
+        this.context = context;
         this.rooms = roomTestData;
         this.layoutInflater = LayoutInflater.from(context);
     }
@@ -25,7 +28,10 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new Holder(layoutInflater.inflate(R.layout.room_card, parent, false));
+        if (context instanceof RoomActivity)
+            return new Holder(layoutInflater.inflate(R.layout.item_card, parent, false));
+        else
+            return new Holder(layoutInflater.inflate(R.layout.room_card, parent, false));
     }
 
     @Override
@@ -48,6 +54,13 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
 
             textView = itemView.findViewById(R.id.tv_room_card);
             imageView = itemView.findViewById(R.id.iv_room_card);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.startActivity(new Intent(context, RoomActivity.class));
+                }
+            });
         }
 
         void setData(int position) {
