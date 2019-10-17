@@ -6,4 +6,6 @@
     <string name="title_activity_room">RoomActivity</string>
     <string name="item_test">Item Test</string>
     <string name="piece">Piece : %1$s</string>
+    <string name="enter_room_name">Oda adını gir</string>
+    <string name="add">Ekle</string>
 </resources>
