@@ -4,4 +4,6 @@
     <string name="image">image</string>
     <string name="room_test">Room Test</string>
     <string name="title_activity_room">RoomActivity</string>
+    <string name="item_test">Item Test</string>
+    <string name="piece">Piece : %1$s</string>
 </resources>

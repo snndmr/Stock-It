@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
+class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder> {
 
     private Context context;
     private ArrayList<Room> rooms;
     private LayoutInflater layoutInflater;
 
-    CustomAdapter(Context context, ArrayList<Room> roomTestData) {
+    CustomAdapterRooms(Context context, ArrayList<Room> roomTestData) {
         this.context = context;
         this.rooms = roomTestData;
         this.layoutInflater = LayoutInflater.from(context);
@@ -28,10 +28,7 @@ class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (context instanceof RoomActivity)
-            return new Holder(layoutInflater.inflate(R.layout.item_card, parent, false));
-        else
-            return new Holder(layoutInflater.inflate(R.layout.room_card, parent, false));
+        return new Holder(layoutInflater.inflate(R.layout.room_card, parent, false));
     }
 
     @Override

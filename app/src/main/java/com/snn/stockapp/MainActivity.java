@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Room> getRoomTestData() {
         ArrayList<Room> rooms = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             rooms.add(new Room(i % 3 == 0 ? "Bedroom" : "Living Room",
                     i % 3 == 0 ? R.drawable.room_test_2 : R.drawable.room_test_1));
         }
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         RecyclerView recyclerView = findViewById(R.id.rv_rooms);
-        recyclerView.setAdapter(new CustomAdapter(MainActivity.this, getRoomTestData()));
+        recyclerView.setAdapter(new CustomAdapterRooms(MainActivity.this, getRoomTestData()));
         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
     }
 
