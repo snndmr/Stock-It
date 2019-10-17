@@ -1,10 +1,14 @@
 package com.snn.stockapp;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -22,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         RecyclerView recyclerView = findViewById(R.id.rv_rooms);
         recyclerView.setAdapter(new CustomAdapterRooms(MainActivity.this, getRoomTestData()));
         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
