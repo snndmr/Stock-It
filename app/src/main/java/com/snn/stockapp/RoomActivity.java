@@ -2,6 +2,7 @@ package com.snn.stockapp;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,9 @@ public class RoomActivity extends AppCompatActivity {
     private void init(Room room) {
         ImageView imageView = findViewById(R.id.iv_room);
         imageView.setImageResource(room.getImage());
+        TextView textView = findViewById(R.id.tv_room_name);
+        textView.setText(room.getName());
+        textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
 
         RecyclerView recyclerView = findViewById(R.id.rv_items);
         recyclerView.setAdapter(new CustomAdapterItems(RoomActivity.this, getItemTestData()));

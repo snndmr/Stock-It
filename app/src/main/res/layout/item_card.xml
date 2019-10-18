@@ -34,7 +34,7 @@
                 android:text="@string/item_test"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium" />
+                android:textSize="@dimen/text_size_small" />
 
             <TextView
                 android:id="@+id/tv_item_piece"
@@ -42,7 +42,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@android:color/black"
-                android:fontFamily="@font/tokens_bold"
+                android:fontFamily="@font/tokens_normal"
                 android:padding="@dimen/padding_small"
                 android:text="@string/item_test"
                 android:textColor="@android:color/white"
@@ -54,7 +54,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@android:color/black"
-                android:fontFamily="@font/tokens_bold"
+                android:fontFamily="@font/tokens_normal"
                 android:padding="@dimen/padding_small"
                 android:text="@string/item_test"
                 android:textColor="@android:color/white"
