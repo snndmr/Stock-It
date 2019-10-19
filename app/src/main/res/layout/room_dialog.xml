@@ -31,6 +31,7 @@
             android:hint="@string/enter_room_name"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:padding="@dimen/padding_small"
             android:textSize="@dimen/text_size_small" />
 
         <TextView

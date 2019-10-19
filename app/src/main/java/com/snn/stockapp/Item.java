@@ -1,6 +1,8 @@
 package com.snn.stockapp;
 
-class Item {
+import java.io.Serializable;
+
+class Item implements Serializable {
     private String name;
     private String location;
     private int piece;

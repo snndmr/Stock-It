@@ -6,6 +6,9 @@
     <string name="title_activity_room">RoomActivity</string>
     <string name="item_test">Item Test</string>
     <string name="piece">Piece : %1$s</string>
-    <string name="enter_room_name">Oda adını gir</string>
+    <string name="enter_room_name">Odanın adını gir</string>
     <string name="add">Ekle</string>
+    <string name="enter_item_name">Eşyanın adını girin</string>
+    <string name="enter_item_piece">Eşyanın adedini girin</string>
+    <string name="enter_item_location">Eşyanın konumunu girin</string>
 </resources>

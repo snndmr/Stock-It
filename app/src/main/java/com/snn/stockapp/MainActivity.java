@@ -1,5 +1,6 @@
 package com.snn.stockapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     private Toast toast;
     private ArrayList<Room> rooms;
     private SharedPreferences sharedPreferences;
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (editTextAdd.length() > 0) {
                     alertDialog.dismiss();
-                    rooms.add(0, new Room(editTextAdd.getText().toString(), R.drawable.room_test_3));
+                    rooms.add(0, new Room(editTextAdd.getText().toString()));
                     saveData();
 
                     customAdapterRooms.notifyDataSetChanged();
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.tv_app_name);
         textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
 
-        this.rooms = new ArrayList<>();
+        rooms = new ArrayList<>();
         this.sharedPreferences = getSharedPreferences("USER", MODE_PRIVATE);
         loadData();
 
@@ -134,5 +137,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().getDecorView().setBackground(GradientColors.BACKGROUND);
         init();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            ArrayList<Item> items;
+            if (data != null) {
+                items = (ArrayList<Item>) data.getSerializableExtra("Result");
+                rooms.get(data.getIntExtra("Position", 0)).setItems(items);
+                saveData();
+            }
+        }
     }
 }

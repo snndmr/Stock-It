@@ -11,7 +11,7 @@ class Room implements Serializable {
     Room(String name) {
         this.name = name;
         this.items = new ArrayList<>();
-        this.image = R.drawable.room_test_1;
+        this.image = R.drawable.room_test_3;
     }
 
     Room(String name, int image) {

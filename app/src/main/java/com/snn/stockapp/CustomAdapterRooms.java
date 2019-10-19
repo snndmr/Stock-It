@@ -1,5 +1,6 @@
 package com.snn.stockapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder> {
 
+    private final int REQUEST_CODE = 10;
     private Context context;
     private ArrayList<Room> rooms;
     private LayoutInflater layoutInflater;
@@ -59,8 +61,9 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, RoomActivity.class);
+                    intent.putExtra("Position", position);
                     intent.putExtra("Room", rooms.get(position));
-                    context.startActivity(intent);
+                    ((Activity) context).startActivityForResult(intent, REQUEST_CODE);
                 }
             });
         }
