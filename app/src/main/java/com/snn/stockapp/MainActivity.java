@@ -1,9 +1,18 @@
 package com.snn.stockapp;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,11 +21,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements BottomDialog.BottomDialogListener {
+public class MainActivity extends AppCompatActivity {
     private ArrayList<Room> rooms;
-    private BottomDialog bottomDialog;
     private GridLayoutManager gridLayoutManager;
     private CustomAdapterRooms customAdapterRooms;
+    private Toast toast;
 
     private ArrayList<Room> getRoomTestData() {
         for (int i = 0; i < 50; i++) {
@@ -38,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements BottomDialog.Bott
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bottomDialog = new BottomDialog();
-                bottomDialog.show(getSupportFragmentManager(), "BottomDialog");
+                showDialog(view);
             }
         });
 
@@ -58,17 +66,50 @@ public class MainActivity extends AppCompatActivity implements BottomDialog.Bott
         init();
     }
 
-    @Override
-    public void cameraClick() {
-
+    private void showToast(String text) {
+        if (this.toast != null) {
+            this.toast.cancel();
+        }
+        this.toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+        this.toast.show();
     }
 
-    @Override
-    public void addClick(String name) {
-        bottomDialog.dismiss();
+    void showDialog(View view) {
+        Rect displayRectangle = new Rect();
+        Window window = MainActivity.this.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.room_dialog, viewGroup, false);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
 
-        rooms.add(0, new Room(name, R.drawable.room_test_3));
-        customAdapterRooms.notifyDataSetChanged();
-        gridLayoutManager.scrollToPositionWithOffset(0, 0);
+        final EditText editTextAdd = dialogView.findViewById(R.id.et_room_add);
+        final TextView textViewAdd = dialogView.findViewById(R.id.tv_room_add);
+        final ImageView imageViewCamera = dialogView.findViewById(R.id.iv_camera);
+
+        textViewAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextAdd.length() > 0) {
+                    alertDialog.dismiss();
+                    rooms.add(0, new Room(editTextAdd.getText().toString(), R.drawable.room_test_3));
+                    customAdapterRooms.notifyDataSetChanged();
+                    gridLayoutManager.scrollToPositionWithOffset(0, 0);
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                } else {
+                    showToast("Odanın adını girmelisin");
+                }
+            }
+        });
+
+        imageViewCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("Bu özellik yapım aşamasında");
+            }
+        });
+
+        alertDialog.show();
     }
 }

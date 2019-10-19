@@ -22,8 +22,7 @@ class GradientColors {
     static final GradientDrawable BACKGROUND
             = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
             new int[]{
-                    android.graphics.Color.parseColor("#3b8d99"),
-                    android.graphics.Color.parseColor("#6b6b83"),
-                    android.graphics.Color.parseColor("#aa4b6b"),
+                    android.graphics.Color.parseColor("#3B8D99"),
+                    android.graphics.Color.parseColor("#AA4B6B"),
             });
 }
