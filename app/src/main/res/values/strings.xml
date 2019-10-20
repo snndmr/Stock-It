@@ -11,4 +11,11 @@
     <string name="enter_item_name">Eşyanın adını girin</string>
     <string name="enter_item_piece">Eşyanın adedini girin</string>
     <string name="enter_item_location">Eşyanın konumunu girin</string>
+    <string name="edit">Düzenle</string>
+    <string name="enter_new_room_name">Odanın yeni adını gir</string>
+    <string name="delete">Sil</string>
+    <string name="share">Paylaş</string>
+    <string name="enter_new_name_item">Eşyanın yeni adını girin</string>
+    <string name="enter_new_piece_item">Eşyanın yeni adedini girin</string>
+    <string name="enter_new_place_item">Eşyanın yeni konumunu girin</string>
 </resources>

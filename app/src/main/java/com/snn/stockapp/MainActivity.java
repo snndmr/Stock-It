@@ -28,7 +28,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomDialog.BottomDialogListener {
 
     private Toast toast;
     private ArrayList<Room> rooms;
@@ -64,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void showDialog(View view) {
+    void showAddDialog(View view) {
         Window window = MainActivity.this.getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(new Rect());
 
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.room_dialog, viewGroup, false);
+        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.room_add_dialog, viewGroup, false);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
         builder.setView(dialogView);
@@ -108,6 +108,50 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    void showEditDialog(View view, final int position) {
+        Window window = MainActivity.this.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(new Rect());
+
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.room_edit_dialog, viewGroup, false);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.CustomAlertDialog);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+
+        final EditText editTextAdd = dialogView.findViewById(R.id.et_room_add);
+        final TextView textViewAdd = dialogView.findViewById(R.id.tv_room_add);
+        final ImageView imageViewCamera = dialogView.findViewById(R.id.iv_camera);
+
+        textViewAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextAdd.length() > 0) {
+                    alertDialog.dismiss();
+                    rooms.set(position, new Room(editTextAdd.getText().toString()));
+                    saveData();
+
+                    customAdapterRooms.notifyDataSetChanged();
+                    gridLayoutManager.scrollToPositionWithOffset(0, 0);
+
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    showToast("Oda düzenlendi");
+                } else {
+                    showToast("Odanın yeni adını girmelisin");
+                }
+            }
+        });
+
+        imageViewCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("Bu özellik yapım aşamasında");
+            }
+        });
+
+        alertDialog.show();
+    }
+
     private void init() {
         TextView textView = findViewById(R.id.tv_app_name);
         textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
@@ -120,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(view);
+                showAddDialog(view);
             }
         });
 
@@ -151,5 +195,19 @@ public class MainActivity extends AppCompatActivity {
                 saveData();
             }
         }
+    }
+
+    @Override
+    public void editItem(int position) {
+        showEditDialog(findViewById(android.R.id.content), position);
+        customAdapterRooms.notifyDataSetChanged();
+        saveData();
+    }
+
+    @Override
+    public void deleteItem(int position) {
+        rooms.remove(position);
+        customAdapterRooms.notifyDataSetChanged();
+        saveData();
     }
 }

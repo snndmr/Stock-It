@@ -24,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RoomActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity implements BottomDialog.BottomDialogListener {
     private Toast toast;
     private ArrayList<Item> items;
     private CustomAdapterItems customAdapterItems;
@@ -38,7 +38,7 @@ public class RoomActivity extends AppCompatActivity {
         this.toast.show();
     }
 
-    void showDialog(View view, final int position) {
+    void showAddDialog(View view, final int position) {
         Window window = RoomActivity.this.getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(new Rect());
 
@@ -59,7 +59,7 @@ public class RoomActivity extends AppCompatActivity {
         textViewAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editTextName.length() > 0 && editTextLocation.length() > 0) {
+                if (editTextName.length() > 0) {
                     alertDialog.dismiss();
                     items.add(0, new Item(editTextName.getText().toString(),
                             editTextLocation.getText().toString(),
@@ -91,6 +91,59 @@ public class RoomActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    void showEditDialog(View view, final int position) {
+        Window window = RoomActivity.this.getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(new Rect());
+
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.item_bottom_edit_dialog, viewGroup, false);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(RoomActivity.this, R.style.CustomAlertDialog);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+
+        final EditText editTextName = dialogView.findViewById(R.id.et_item_name);
+        final EditText editTextPiece = dialogView.findViewById(R.id.et_item_piece);
+        final EditText editTextLocation = dialogView.findViewById(R.id.et_item_location);
+
+        final TextView textViewAdd = dialogView.findViewById(R.id.tv_room_add);
+        final ImageView imageViewCamera = dialogView.findViewById(R.id.iv_camera);
+
+        textViewAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextName.length() > 0) {
+                    alertDialog.dismiss();
+                    items.set(position, new Item(editTextName.getText().toString(),
+                            editTextLocation.getText().toString(),
+                            (editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1)));
+
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("Result", items);
+                    returnIntent.putExtra("Position", position);
+                    setResult(Activity.RESULT_OK, returnIntent);
+
+                    customAdapterItems.notifyDataSetChanged();
+                    linearLayoutManager.scrollToPositionWithOffset(0, 0);
+
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    showToast("Eşya güncellendi");
+                } else {
+                    showToast("Eşyanın adını ve konumunu girmelisin");
+                }
+            }
+        });
+
+        imageViewCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("Bu özellik yapım aşamasında");
+            }
+        });
+
+        alertDialog.show();
+    }
+
     private void init(Room room, final int position) {
         items = room.getItems();
 
@@ -98,7 +151,7 @@ public class RoomActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(view, position);
+                showAddDialog(view, position);
             }
         });
 
@@ -122,5 +175,23 @@ public class RoomActivity extends AppCompatActivity {
         getWindow().getDecorView().setBackground(GradientColors.BACKGROUND);
         init((Room) Objects.requireNonNull(getIntent().getSerializableExtra("Room")),
                 getIntent().getIntExtra("Position", 0));
+    }
+
+    @Override
+    public void editItem(int position) {
+        showEditDialog(findViewById(android.R.id.content), position);
+    }
+
+    @Override
+    public void deleteItem(int position) {
+        items.remove(position);
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("Result", items);
+        returnIntent.putExtra("Position", position);
+        setResult(Activity.RESULT_OK, returnIntent);
+
+        customAdapterItems.notifyDataSetChanged();
+        linearLayoutManager.scrollToPositionWithOffset(0, 0);
     }
 }

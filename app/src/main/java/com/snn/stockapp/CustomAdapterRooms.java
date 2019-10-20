@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -51,14 +51,13 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
         private int position;
         private TextView textView;
         private ImageView imageView;
-        private ImageView imageViewMenu;
 
         Holder(@NonNull View itemView) {
             super(itemView);
 
             textView = itemView.findViewById(R.id.tv_room_card);
             imageView = itemView.findViewById(R.id.iv_room_card);
-            imageViewMenu = itemView.findViewById(R.id.iv_room_menu);
+            ImageView imageViewMenu = itemView.findViewById(R.id.iv_room_menu);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +72,8 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
             imageViewMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "" + position, Toast.LENGTH_SHORT).show();
+                    BottomDialog bottomDialog = new BottomDialog(position);
+                    bottomDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "BottomDialog");
                 }
             });
         }

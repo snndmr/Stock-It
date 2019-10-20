@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -44,6 +45,7 @@ class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder>
 
     class Holder extends RecyclerView.ViewHolder {
 
+        private int position;
         private TextView tv_name;
         private TextView tv_piece;
         private TextView tv_location;
@@ -56,10 +58,21 @@ class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder>
             tv_piece = itemView.findViewById(R.id.tv_item_piece);
             tv_location = itemView.findViewById(R.id.tv_item_location);
             imageView = itemView.findViewById(R.id.iv_item_card);
+
+            ImageView imageViewMenu = itemView.findViewById(R.id.iv_item_menu);
+            imageViewMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BottomDialog bottomDialog = new BottomDialog(position);
+                    bottomDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "BottomDialog");
+                }
+            });
         }
 
         void setData(int position) {
+            this.position = position;
             tv_name.setText(items.get(position).getName());
+            tv_name.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
             tv_location.setText(items.get(position).getLocation());
             tv_piece.setText(context.getString(R.string.piece, String.valueOf(items.get(position).getPiece())));
             Picasso.get().load(items.get(position).getImage()).fit().centerCrop().into(imageView);

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/card_elevation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_large"
+            android:contentDescription="@string/image"
+            android:src="@drawable/camera" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:fontFamily="@font/tokens_normal"
+                android:hint="@string/enter_new_name_item"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/text_size_small" />
+
+            <EditText
+                android:id="@+id/et_item_piece"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:fontFamily="@font/tokens_normal"
+                android:hint="@string/enter_new_piece_item"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/text_size_small" />
+
+            <EditText
+                android:id="@+id/et_item_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:fontFamily="@font/tokens_normal"
+                android:hint="@string/enter_new_place_item"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="@dimen/padding_small"
+                android:textSize="@dimen/text_size_small" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_room_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/margin_large"
+            android:fontFamily="@font/tokens_bold"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/edit"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
