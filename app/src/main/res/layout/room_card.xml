@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:contentDescription="@string/image"
-            android:src="@drawable/room_test_1" />
+            android:src="@drawable/room_test_1"
+            android:tint="@color/transparency" />
 
         <TextView
             android:id="@+id/tv_room_card"

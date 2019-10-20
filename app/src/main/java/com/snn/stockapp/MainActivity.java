@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements BottomDialog.Bott
 
     private void init() {
         TextView textView = findViewById(R.id.tv_app_name);
-        textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
 
         rooms = new ArrayList<>();
         this.sharedPreferences = getSharedPreferences("USER", MODE_PRIVATE);
@@ -187,12 +187,13 @@ public class MainActivity extends AppCompatActivity implements BottomDialog.Bott
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK && requestCode == CustomAdapterRooms.REQUEST_CODE) {
             ArrayList<Item> items;
             if (data != null) {
                 items = (ArrayList<Item>) data.getSerializableExtra("Result");
                 rooms.get(data.getIntExtra("Position", 0)).setItems(items);
                 saveData();
+                Log.e("FAK", "Test");
             }
         }
     }

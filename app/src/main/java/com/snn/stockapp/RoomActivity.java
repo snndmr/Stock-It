@@ -52,6 +52,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
         final EditText editTextName = dialogView.findViewById(R.id.et_item_name);
         final EditText editTextPiece = dialogView.findViewById(R.id.et_item_piece);
         final EditText editTextLocation = dialogView.findViewById(R.id.et_item_location);
+        final EditText editTextDescription = dialogView.findViewById(R.id.et_item_description);
 
         final TextView textViewAdd = dialogView.findViewById(R.id.tv_room_add);
         final ImageView imageViewCamera = dialogView.findViewById(R.id.iv_camera);
@@ -61,9 +62,11 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
             public void onClick(View v) {
                 if (editTextName.length() > 0) {
                     alertDialog.dismiss();
-                    items.add(0, new Item(editTextName.getText().toString(),
-                            editTextLocation.getText().toString(),
-                            (editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1)));
+                    items.add(0,
+                            new Item(editTextName.getText().toString(),
+                                    editTextLocation.length() > 0 ? editTextLocation.getText().toString() : "Yer belirtilmedi.",
+                                    editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1,
+                                    editTextDescription.length() > 0 ? editTextPiece.getText().toString() : "Tanım yapılmadı."));
 
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("Result", items);
@@ -76,7 +79,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     showToast("Eşya eklendi");
                 } else {
-                    showToast("Eşyanın adını ve konumunu girmelisin");
+                    showToast("Eşyanın adını girmelisin");
                 }
             }
         });
@@ -105,6 +108,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
         final EditText editTextName = dialogView.findViewById(R.id.et_item_name);
         final EditText editTextPiece = dialogView.findViewById(R.id.et_item_piece);
         final EditText editTextLocation = dialogView.findViewById(R.id.et_item_location);
+        final EditText editTextDescription = dialogView.findViewById(R.id.et_item_description);
 
         final TextView textViewAdd = dialogView.findViewById(R.id.tv_room_add);
         final ImageView imageViewCamera = dialogView.findViewById(R.id.iv_camera);
@@ -114,9 +118,11 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
             public void onClick(View v) {
                 if (editTextName.length() > 0) {
                     alertDialog.dismiss();
-                    items.set(position, new Item(editTextName.getText().toString(),
-                            editTextLocation.getText().toString(),
-                            (editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1)));
+                    items.set(position,
+                            new Item(editTextName.getText().toString(),
+                                    editTextLocation.length() > 0 ? editTextLocation.getText().toString() : "Yer belirtilmedi.",
+                                    editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1,
+                                    editTextDescription.length() > 0 ? editTextPiece.getText().toString() : "Tanım yapılmadı."));
 
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra("Result", items);
@@ -129,7 +135,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     showToast("Eşya güncellendi");
                 } else {
-                    showToast("Eşyanın adını ve konumunu girmelisin");
+                    showToast("Eşyanın adını girmelisin");
                 }
             }
         });
@@ -159,7 +165,6 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
         imageView.setImageResource(room.getImage());
         TextView textView = findViewById(R.id.tv_room_name);
         textView.setText(room.getName());
-        textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
 
         RecyclerView recyclerView = findViewById(R.id.rv_items);
         customAdapterItems = new CustomAdapterItems(RoomActivity.this, items);

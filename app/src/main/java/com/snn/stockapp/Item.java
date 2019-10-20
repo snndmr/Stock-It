@@ -5,6 +5,7 @@ import java.io.Serializable;
 class Item implements Serializable {
     private String name;
     private String location;
+    private String description;
     private int piece;
     private int image;
 
@@ -27,6 +28,22 @@ class Item implements Serializable {
         this.location = location;
         this.piece = piece;
         this.image = image;
+    }
+
+    Item(String name, String location, int piece, String description) {
+        this.name = name;
+        this.location = location;
+        this.description = description;
+        this.piece = piece;
+        this.image = R.drawable.room_test_1;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     String getName() {

@@ -49,6 +49,7 @@ class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder>
         private TextView tv_name;
         private TextView tv_piece;
         private TextView tv_location;
+        private TextView tv_description;
         private ImageView imageView;
 
         Holder(@NonNull View itemView) {
@@ -57,6 +58,7 @@ class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder>
             tv_name = itemView.findViewById(R.id.tv_item_name);
             tv_piece = itemView.findViewById(R.id.tv_item_piece);
             tv_location = itemView.findViewById(R.id.tv_item_location);
+            tv_description = itemView.findViewById(R.id.tv_item_description);
             imageView = itemView.findViewById(R.id.iv_item_card);
 
             ImageView imageViewMenu = itemView.findViewById(R.id.iv_item_menu);
@@ -72,9 +74,9 @@ class CustomAdapterItems extends RecyclerView.Adapter<CustomAdapterItems.Holder>
         void setData(int position) {
             this.position = position;
             tv_name.setText(items.get(position).getName());
-            tv_name.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
             tv_location.setText(items.get(position).getLocation());
             tv_piece.setText(context.getString(R.string.piece, String.valueOf(items.get(position).getPiece())));
+            tv_description.setText(items.get(position).getDescription());
             Picasso.get().load(items.get(position).getImage()).fit().centerCrop().into(imageView);
         }
     }

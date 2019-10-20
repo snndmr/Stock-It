@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder> {
 
-    private final int REQUEST_CODE = 10;
+    static final int REQUEST_CODE = 10;
     private Context context;
     private ArrayList<Room> rooms;
     private LayoutInflater layoutInflater;
@@ -82,7 +82,6 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
             this.position = position;
 
             textView.setText(rooms.get(position).getName());
-            textView.setBackground(GradientColors.TEXT_VIEW_BACKGROUND);
             Picasso.get().load(rooms.get(position).getImage()).fit().centerCrop().into(imageView);
         }
     }
