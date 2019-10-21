@@ -1,9 +1,8 @@
 package com.snn.stockapp;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RoomActivity extends AppCompatActivity implements BottomDialog.BottomDialogListener {
     private Toast toast;
@@ -68,10 +66,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
                                     editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1,
                                     editTextDescription.length() > 0 ? editTextPiece.getText().toString() : "Tanım yapılmadı."));
 
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("Result", items);
-                    returnIntent.putExtra("Position", position);
-                    setResult(Activity.RESULT_OK, returnIntent);
+                    Room.saveData();
 
                     customAdapterItems.notifyDataSetChanged();
                     linearLayoutManager.scrollToPositionWithOffset(0, 0);
@@ -124,10 +119,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
                                     editTextPiece.length() > 0 ? Integer.valueOf(editTextPiece.getText().toString()) : 1,
                                     editTextDescription.length() > 0 ? editTextPiece.getText().toString() : "Tanım yapılmadı."));
 
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("Result", items);
-                    returnIntent.putExtra("Position", position);
-                    setResult(Activity.RESULT_OK, returnIntent);
+                    Room.saveData();
 
                     customAdapterItems.notifyDataSetChanged();
                     linearLayoutManager.scrollToPositionWithOffset(0, 0);
@@ -150,8 +142,9 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
         alertDialog.show();
     }
 
-    private void init(Room room, final int position) {
-        items = room.getItems();
+    private void init(final int position) {
+        items = Room.rooms.get(position).getItems();
+        Log.e("FAK", items.size() + "");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -162,9 +155,9 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
         });
 
         ImageView imageView = findViewById(R.id.iv_room);
-        imageView.setImageResource(room.getImage());
+        imageView.setImageResource(Room.rooms.get(position).getImage());
         TextView textView = findViewById(R.id.tv_room_name);
-        textView.setText(room.getName());
+        textView.setText(Room.rooms.get(position).getName());
 
         RecyclerView recyclerView = findViewById(R.id.rv_items);
         customAdapterItems = new CustomAdapterItems(RoomActivity.this, items);
@@ -178,8 +171,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         getWindow().getDecorView().setBackground(GradientColors.BACKGROUND);
-        init((Room) Objects.requireNonNull(getIntent().getSerializableExtra("Room")),
-                getIntent().getIntExtra("Position", 0));
+        init(getIntent().getIntExtra("Position", 0));
     }
 
     @Override
@@ -189,12 +181,9 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
 
     @Override
     public void deleteItem(int position) {
+        Room.rooms.get(position).getItems().remove(position);
         items.remove(position);
-
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("Result", items);
-        returnIntent.putExtra("Position", position);
-        setResult(Activity.RESULT_OK, returnIntent);
+        Room.saveData();
 
         customAdapterItems.notifyDataSetChanged();
         linearLayoutManager.scrollToPositionWithOffset(0, 0);

@@ -1,6 +1,5 @@
 package com.snn.stockapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -64,8 +63,7 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
                 public void onClick(View view) {
                     Intent intent = new Intent(context, RoomActivity.class);
                     intent.putExtra("Position", position);
-                    intent.putExtra("Room", rooms.get(position));
-                    ((Activity) context).startActivityForResult(intent, REQUEST_CODE);
+                    context.startActivity(intent);
                 }
             });
 

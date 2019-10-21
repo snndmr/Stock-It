@@ -38,11 +38,11 @@ class Item implements Serializable {
         this.image = R.drawable.room_test_1;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         this.description = description;
     }
 
