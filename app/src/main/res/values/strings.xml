@@ -1,23 +1,20 @@
 <resources>
-    <string name="app_name">StockApp</string>
-    <string name="search_something">Hadi bir şeyler ara</string>
+    <string name="app_name">Stock It</string>
+    <string name="action_settings">Settings</string>
     <string name="image">image</string>
+    <string name="search_something">Hadi bir şeyler ara</string>
     <string name="room_test">Room Test</string>
-    <string name="title_activity_room">RoomActivity</string>
+    <string name="enter_room_name">Odanın adını girin</string>
+    <string name="add">Ekle</string>
+    <string name="edit">Düzenle</string>
+    <string name="delete">Sil</string>
+    <string name="share">Paylaş</string>
+    <string name="update">Güncelle</string>
     <string name="item_test">Item Test</string>
     <string name="piece">Adet : %1$s</string>
-    <string name="enter_room_name">Odanın adını gir</string>
-    <string name="add">Ekle</string>
+    <string name="title_activity_room">RoomActivity</string>
     <string name="enter_item_name">Eşyanın adını girin</string>
     <string name="enter_item_piece">Eşyanın adedini girin</string>
     <string name="enter_item_location">Eşyanın konumunu girin</string>
-    <string name="edit">Düzenle</string>
-    <string name="enter_new_room_name">Odanın yeni adını gir</string>
-    <string name="delete">Sil</string>
-    <string name="share">Paylaş</string>
-    <string name="enter_new_name_item">Eşyanın yeni adını girin</string>
-    <string name="enter_new_piece_item">Eşyanın yeni adedini girin</string>
-    <string name="enter_new_place_item">Eşyanın yeni konumunu girin</string>
-    <string name="enter_item_description">Eşyanın tanımını girin</string>
-    <string name="enter_new_description_item">Eşyanın yeni tanımını girin</string>
+    <string name="enter_item_description">Eşyanının tanımını girin</string>
 </resources>

@@ -1,7 +1,6 @@
-package com.snn.stockapp;
+package com.snn.stockit;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,27 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
-class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder> {
+public class CustomItemAdapter extends RecyclerView.Adapter<CustomItemAdapter.Holder> {
 
-    static final int REQUEST_CODE = 10;
     private Context context;
-    private ArrayList<Room> rooms;
+    private ArrayList<Item> items;
     private LayoutInflater layoutInflater;
 
-    CustomAdapterRooms(Context context, ArrayList<Room> roomTestData) {
+    CustomItemAdapter(Context context, int position) {
         this.context = context;
-        this.rooms = roomTestData;
+        this.items = Room.getRooms().get(position).getItems();
         this.layoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new Holder(layoutInflater.inflate(R.layout.room_card, parent, false));
+        return new Holder(layoutInflater.inflate(R.layout.item_card, parent, false));
     }
 
     @Override
@@ -42,31 +38,28 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
 
     @Override
     public int getItemCount() {
-        return rooms.size();
+        return items.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {
 
         private int position;
-        private TextView textView;
-        private ImageView imageView;
+        private TextView tv_name;
+        private TextView tv_piece;
+        private TextView tv_location;
+        private TextView tv_description;
+        private ImageView iv_room;
 
         Holder(@NonNull View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.tv_room_card);
-            imageView = itemView.findViewById(R.id.iv_room_card);
-            ImageView imageViewMenu = itemView.findViewById(R.id.iv_room_menu);
+            tv_name = itemView.findViewById(R.id.tv_item_name);
+            tv_piece = itemView.findViewById(R.id.tv_item_piece);
+            tv_location = itemView.findViewById(R.id.tv_item_location);
+            tv_description = itemView.findViewById(R.id.tv_item_description);
+            iv_room = itemView.findViewById(R.id.iv_item_card);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, RoomActivity.class);
-                    intent.putExtra("Position", position);
-                    context.startActivity(intent);
-                }
-            });
-
+            ImageView imageViewMenu = itemView.findViewById(R.id.iv_item_menu);
             imageViewMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,9 +71,11 @@ class CustomAdapterRooms extends RecyclerView.Adapter<CustomAdapterRooms.Holder>
 
         void setData(int position) {
             this.position = position;
-
-            textView.setText(rooms.get(position).getName());
-            Picasso.get().load(rooms.get(position).getImage()).fit().centerCrop().into(imageView);
+            tv_name.setText(items.get(position).getItem_name());
+            tv_location.setText(items.get(position).getItem_location());
+            tv_piece.setText(context.getString(R.string.piece, String.valueOf(items.get(position).getItem_piece())));
+            tv_description.setText(items.get(position).getItem_description());
+            iv_room.setImageResource(items.get(position).getItem_image());
         }
     }
 }

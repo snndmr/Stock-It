@@ -2,8 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/content_background"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
@@ -28,13 +30,13 @@
                 app:layout_collapseMode="parallax">
 
                 <ImageView
-                    android:tint="@color/transparency"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/image"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/room_main_3" />
+                    android:src="@drawable/room_main_1"
+                    android:tint="@color/transparency" />
 
                 <TextView
                     android:id="@+id/tv_app_name"
@@ -61,7 +63,7 @@
 
         <include layout="@layout/search_bar" />
 
-        <include layout="@layout/content_scrolling" />
+        <include layout="@layout/content_main" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

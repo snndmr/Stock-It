@@ -1,26 +1,23 @@
 <resources>
     <dimen name="app_bar_height">300dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
 
-    <dimen name="room_card_height">220dp</dimen>
-    <dimen name="room_card_width">180dp</dimen>
-
-    <dimen name="item_card_height">120dp</dimen>
-    <dimen name="item_card_width">160dp</dimen>
-
-    <dimen name="margin_large">16dp</dimen>
-    <dimen name="margin_medium">12dp</dimen>
-    <dimen name="margin_small">8dp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
 
     <dimen name="padding_small">8dp</dimen>
 
-    <dimen name="text_size_small">16sp</dimen>
-    <dimen name="text_size_medium">20sp</dimen>
-    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
 
     <dimen name="card_elevation">4dp</dimen>
-    <dimen name="padding_medium">12dp</dimen>
-    <dimen name="dialog_radius">16dp</dimen>
+    <dimen name="room_card_width">180dp</dimen>
+    <dimen name="room_card_height">240dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="item_card_width">120dp</dimen>
+    <dimen name="item_card_height">120dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
-

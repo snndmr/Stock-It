@@ -1,4 +1,4 @@
-package com.snn.stockapp;
+package com.snn.stockit;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ public class BottomDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.room_bottom_edit_dialog, container, false);
+        View view = inflater.inflate(R.layout.bottom_dialog, container, false);
 
         TextView textViewEdit = view.findViewById(R.id.dialog_edit);
         TextView textViewShare = view.findViewById(R.id.dialog_share);

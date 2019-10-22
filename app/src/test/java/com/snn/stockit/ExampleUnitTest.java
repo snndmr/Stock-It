@@ -1,4 +1,4 @@
-package com.snn.stockapp;
+package com.snn.stockit;
 
 import org.junit.Test;
 

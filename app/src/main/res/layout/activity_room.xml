@@ -34,7 +34,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/image"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/room_main_2"
+                    android:src="@drawable/room_main_1"
                     android:tint="@color/transparency" />
 
                 <TextView

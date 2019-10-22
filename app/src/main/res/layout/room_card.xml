@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/room_card_width"
     android:layout_height="@dimen/room_card_height"
-    android:layout_margin="@dimen/margin_large">
+    android:layout_margin="@dimen/margin_medium">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:contentDescription="@string/image"
+            android:scaleType="centerCrop"
             android:src="@drawable/room_test_1"
             android:tint="@color/transparency" />
 
