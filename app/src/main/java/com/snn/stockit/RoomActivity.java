@@ -100,7 +100,7 @@ public class RoomActivity extends AppCompatActivity implements BottomDialog.Bott
                     );
 
                     customItemAdapter.notifyItemInserted(0);
-                    customItemAdapter.notifyItemRangeChanged(0, Room.getRooms().size());
+                    customItemAdapter.notifyItemRangeChanged(0, Room.getRooms().get(room_position).getItems().size());
                     linearLayoutManager.scrollToPositionWithOffset(0, 0);
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                     MainActivity.saveData();
