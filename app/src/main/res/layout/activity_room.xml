@@ -72,6 +72,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/plus_white"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorAccent"
         app:rippleColor="@android:color/white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
