@@ -1,5 +1,7 @@
 package com.snn.stockit;
 
+//SNN
+
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
