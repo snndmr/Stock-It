@@ -13,23 +13,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/margin_medium"
-            android:contentDescription="@string/image"
-            android:src="@drawable/search" />
-
         <EditText
+            android:id="@+id/et_search_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
             android:cursorVisible="false"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="@dimen/padding_medium"
             android:fontFamily="@font/tokens_normal"
             android:hint="@string/search_something"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:padding="@dimen/padding_medium"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
