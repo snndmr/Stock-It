@@ -1,10 +1,10 @@
 package com.snn.stockit;
 
-//SNN
-
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +67,28 @@ public class MainActivity extends AppCompatActivity implements BottomDialog.Bott
         this.customRoomAdapter = new CustomRoomAdapter(this);
         this.gridLayoutManager = new GridLayoutManager(this, 2);
 
-        RecyclerView rv_rooms = this.findViewById(R.id.rv_rooms);
+        EditText et_search_bar = findViewById(R.id.et_search_bar);
+        et_search_bar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                customRoomAdapter.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        final RecyclerView rv_rooms = this.findViewById(R.id.rv_rooms);
         rv_rooms.setAdapter(customRoomAdapter);
         rv_rooms.setLayoutManager(gridLayoutManager);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
